@@ -17,7 +17,7 @@
 
     <!-- hero -->
     <div class="b-hero position-relative">
-        <div class="b-text position-absolute">
+        <div class="b-text position-absolute b-sm-none">
             <div class="b-hero-title">2025 全台音樂祭</div>
             <div class="b-hero-subtitle">一同締造屬於你的冒險拾光</div>
         </div>
@@ -26,30 +26,30 @@
     <!-- title -->
     <div class="container-fluid">
         <div class="b-title d-flex align-items-baseline">
-            <h1>音樂祭</h1>
-            <h4>/ 流行音樂</h4>
+            <h1 class="mb-0">音樂祭</h1>
+            <h4 class="mb-0">/ 流行音樂</h4>
         </div>
     </div>
 
     <!-- filter & order -->
-    <div class="b-filter-order">
+    <div class="b-filter-bar">
         <div class="container-fluid d-flex justify-content-between">
-            <div class="b-filter-main d-flex">
-                <h4>04 活動</h4>
+            <h4>04 活動</h4>
+            <div class="b-filters d-flex align-items-baseline">
                 <button class="b-filter b-btn-unstyled d-flex align-items-baseline">
                     <i class="fa-solid fa-filter"></i>
                     <h4>篩選</h4>
                 </button>
-            </div>
-            <div class="b-order d-flex align-items-baseline">
-                <i class="fa-solid fa-arrow-up-wide-short"></i>
-                <h4>排序</h4>
+                <button class="b-order b-btn-unstyled d-flex align-items-baseline">
+                    <i class="fa-solid fa-arrow-up-wide-short"></i>
+                    <h4>排序</h4>
+                </button>
             </div>
         </div>
     </div>
 
     <!-- 篩選條件 -->
-    <div class="b-filter-slide d-flex flex-column align-items-center">
+    <div class="b-filter-slide d-flex flex-column align-items-center d-none ">
         <div class="b-filter-title d-flex justify-content-between align-items-center w-100">
             <h4><button class="b-btn-unstyled">清除篩選條件</button></h4>
             <button class="b-filter-close-btn b-btn-unstyled">
@@ -60,7 +60,7 @@
 
         <form class="w-100 b-filter-conds d-flex flex-column align-items-start align-self-stretch">
             <!-- 活動類型 cate -->
-            <div class="b-form-elem d-flex flex-column align-self-stretch">
+            <div class=" d-flex flex-column align-self-stretch">
                 <h4>活動類型</h4>
                 <div class="b-form-checkbox d-flex align-items-center">
                     <input class="" type="checkbox" value="" id="cate1" />
@@ -76,7 +76,7 @@
                 </div>
             </div>
             <!-- 音樂類型 genre -->
-            <div class="b-form-elem d-flex flex-column align-self-stretch">
+            <div class=" d-flex flex-column align-self-stretch">
                 <h4>音樂類型</h4>
                 <div class="b-form-checkbox d-flex align-items-center">
                     <input class="" type="checkbox" value="" id="genre1" />
@@ -134,7 +134,7 @@
                 </div>
             </div>
             <!-- 活動日期 date -->
-            <div class="b-form-elem d-flex flex-column align-self-stretch">
+            <div class=" d-flex flex-column align-self-stretch">
                 <h4>日期</h4>
                 <div class="b-form-date">
                     <div class="d-flex justify-content-between align-items-center">
@@ -150,7 +150,7 @@
 
             </div>
             <!-- 城市 city -->
-            <div class="b-form-elem d-flex flex-column align-self-stretch">
+            <div class=" d-flex flex-column align-self-stretch">
                 <h4>城市</h4>
                 <select class="b-form-select">
                     <option selected>請選擇城市</option>
@@ -180,7 +180,7 @@
                 </select>
             </div>
             <!-- 價錢 ticket_price -->
-            <div class="b-form-elem d-flex flex-column align-self-stretch">
+            <div class=" d-flex flex-column align-self-stretch">
                 <h4>價錢</h4>
                 <div class="d-flex flex-column align-items-center gap-4">
                     <div class="b-slide-bar w-100 position-relative">
@@ -196,23 +196,94 @@
 
     <div class="container-fluid">
         <!-- act list -->
-        <div class="b-act-list b-form-checkbox d-flex flex-column">
-            <div class="row row-cols-2">
-                <!-- 之後可以試試看改成 col-6 -->
-                <div class="col d-flex">
-                    <div class="b-img flex-grow-1"></div>
-                    <!-- <img class="flex-grow-1" src="/images/20240215_共生音樂節.jpeg" alt=""> -->
-                    <div class="b-card-body flex-grow-1 d-flex flex-column">
-                        <div class="b-text d-flex flex-column">
-                            <h4>音樂祭</h4>
-                            <h2><a href="">《裂變景觀》jonCates 與 Jason Cole Mager雙人展 Two-person show</a></h2>
-                            <div class="h5">日期 : 114/01/05 ~ 114/03/02</div>
-                            <h5 class="b-tag">流行音樂</h5>
-                            <h6>票價 : 免費入場</h6>
-                            <h6>地點 : Project Space 110 新店藝術空間</h6>
+        <div class="b-act-list d-flex flex-column">
+            <div class="row row-cols-1 row-cols-xxl-2 gx-5 gy-5">
+                <!-- act -->
+                <div class="col">
+                    <div class="card">
+                        <div class="row g-0">
+                            <!-- card-image -->
+                            <div class="col-4 col-lg-6">
+                                <img class="object-fit-cover w-100 h-100" src="/images/20240215_共生音樂節.jpeg" alt="">
+                            </div>
+                            <!-- card-body -->
+                            <div class="col-8 col-lg-6">
+                                <div class="card-body d-flex flex-column">
+                                    <div class="b-text d-flex flex-column">
+                                        <h4 class="b-sm-none">音樂祭</h4>
+                                        <h2 class="card-title"><a href="">裂變景觀 jonCates 與 Jason Cole Mager雙人展 Two-person
+                                                show</a></h2>
+                                        <div class="h5">日期 : 114/01/05 ~ 114/03/02</div>
+                                        <h5 class="card-text b-tag">流行音樂</h5>
+                                        <h6 class="card-text ">票價 : 免費入場</h6>
+                                        <h6 class="b-sm-none">地點 : Project Space 110 新店藝術空間</h6>
+                                    </div>
+                                    <a class="b-btn b-sm-none" href="https://www.google.com/maps">查看地圖
+                                        <!-- <i class="ms-3 fa-solid fa-map"></i>
+                                    <i class="ms-3 fa-regular fa-map"></i> -->
+                                        <i class="ms-2 fa-solid fa-location-arrow"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <a class="b-btn" href="https://www.google.com/maps">查看地圖<i class="ms-3 fa-solid fa-map"></i>
-                            <i class="ms-3 fa-regular fa-map"></i><i class="ms-3 fa-solid fa-location-arrow"></i></a>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="row g-0">
+                            <!-- card-image -->
+                            <div class="col-4 col-lg-6">
+                                <img class="object-fit-cover w-100 h-100" src="/images/20240215_共生音樂節.jpeg" alt="">
+                            </div>
+                            <!-- card-body -->
+                            <div class="col-8 col-lg-6">
+                                <div class="card-body d-flex flex-column">
+                                    <div class="b-text d-flex flex-column">
+                                        <h4 class="b-sm-none">音樂祭</h4>
+                                        <h2 class="card-title"><a href="">裂變景觀 jonCates 與 Jason Cole Mager雙人展 Two-person
+                                                show</a></h2>
+                                        <div class="h5">日期 : 114/01/05 ~ 114/03/02</div>
+                                        <h5 class="card-text b-tag">流行音樂</h5>
+                                        <h6 class="card-text ">票價 : 免費入場</h6>
+                                        <h6 class="b-sm-none">地點 : Project Space 110 新店藝術空間</h6>
+                                    </div>
+                                    <a class="b-btn b-sm-none" href="https://www.google.com/maps">查看地圖
+                                        <!-- <i class="ms-3 fa-solid fa-map"></i>
+                                    <i class="ms-3 fa-regular fa-map"></i> -->
+                                        <i class="ms-2 fa-solid fa-location-arrow"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="row g-0">
+                            <!-- card-image -->
+                            <div class="col-4 col-lg-6">
+                                <img class="object-fit-cover w-100 h-100" src="/images/20240215_共生音樂節.jpeg" alt="">
+                            </div>
+                            <!-- card-body -->
+                            <div class="col-8 col-lg-6">
+                                <div class="card-body d-flex flex-column">
+                                    <div class="b-text d-flex flex-column">
+                                        <h4 class="b-sm-none">音樂祭</h4>
+                                        <h2 class="card-title"><a href="">裂變景觀 jonCates 與 Jason Cole Mager雙人展 Two-person
+                                                show</a></h2>
+                                        <div class="h5">日期 : 114/01/05 ~ 114/03/02</div>
+                                        <h5 class="card-text b-tag">流行音樂</h5>
+                                        <h6 class="card-text ">票價 : 免費入場</h6>
+                                        <h6 class="b-sm-none">地點 : Project Space 110 新店藝術空間</h6>
+                                    </div>
+                                    <a class="b-btn b-sm-none" href="https://www.google.com/maps">查看地圖
+                                        <!-- <i class="ms-3 fa-solid fa-map"></i>
+                                    <i class="ms-3 fa-regular fa-map"></i> -->
+                                        <i class="ms-2 fa-solid fa-location-arrow"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
