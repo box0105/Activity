@@ -1,11 +1,88 @@
 /* 活動詳細頁 */
+.b-detail-page {
+    .container-fluid {
+        padding-top: 2rem;
+
+        .b-hero {
+            background: url("/images/浮現祭/main.jpg") center center / cover no-repeat;
+        }
+
+        .b-main-info {
+            padding-top: 3rem;
+            padding-bottom: 4.5rem;
+
+            .breadcrumb-item a:hover {
+                color: #2f97c6;
+            }
+
+            .b-title {
+                padding-top: 1rem;
+            }
+
+            .col-12 {
+                padding-bottom: 3rem;
+            }
+            .b-card-info,
+            .b-card-band {
+                border-top: 1.5px solid var(--grey100);
+                padding-top: 3rem;
+            }
+
+            .table td {
+                align-content: center;
+            }
+        }
+
+        .b-card {
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 2px solid var(--grey200);
+        }
+
+        .b-card.b-article-card {
+            border: 2px solid var(--grey100);
+            gap: 3rem;
+        }
+
+        .b-aside {
+            background: var(--grey50);
+            padding: 2.25rem;
+            width: 24.375rem;
+            position: sticky;
+            top: 0;
+
+            /* @media screen and (max-width:576px) {
+                width: 100%;
+            } */
+
+            .b-purchaseBtn {
+                margin-top: 2.5rem;
+            }
+
+            .b-warning {
+                border-top: 1.5px solid var(--grey200);
+            }
+        }
+
+        .b-other-act {
+            .b-title {
+                padding-top: 6rem;
+            }
+
+            .b-act-list {
+                padding-block: 2.5rem;
+            }
+        }
+    }
+}
+
 
 
 /* 活動列表頁 */
 .b-hero {
     width: auto;
     height: 520px;
-    background: url("/images/240329-S2O-音樂祭.jpeg") center center / cover no-repeat;
+    background: url("/images/封面圖.jpeg") center center / cover no-repeat;
     opacity: 0.9;
 
     .b-text {
@@ -14,7 +91,7 @@
         transform: translateY(-50%);
 
         .b-hero-title {
-            color: var(--grey-50, #F9F9F9);
+            color: var(--grey50);
             font-family: Poppins;
             font-size: 3.5rem;
             font-weight: 700;
@@ -22,7 +99,7 @@
         }
 
         .b-hero-subtitle {
-            color: var(--grey-50, #F9F9F9);
+            color: var(--grey50);
             font-family: "Noto Sans TC";
             font-size: 2.25rem;
             font-weight: 500;
@@ -39,10 +116,10 @@
 
 .b-filter-bar {
     padding-block: 1.25rem;
-    border-top: 1px solid var(--grey-100, #DADADA);
+    border-top: 1px solid var(--grey100);
 
     h4 {
-        color: var(--grey-500, #999);
+        color: var(--grey500);
     }
 
     .b-filters {
@@ -90,7 +167,7 @@
         h4 {
             padding-bottom: 1.5rem;
             margin-bottom: 1.5rem;
-            border-bottom: 1px solid var(--grey-200, #CACACA);
+            border-bottom: 1px solid var(--grey200);
         }
 
         h6 {
@@ -107,7 +184,7 @@
                 width: 1.5rem;
                 height: 1.5rem;
                 border-radius: 0.125rem;
-                border: 1px solid var(--black, #000);
+                border: 1px solid var(--black);
             }
         }
 
@@ -215,8 +292,8 @@
 .b-btn {
     padding: 0.5rem 1rem;
     border-radius: var(--button-rounded-radius, 6.25rem);
-    border: 1px solid var(--black, #000);
-    color: var(--black, #000);
+    border: 1px solid var(--black);
+    color: var(--black);
     text-align: center;
     align-self: flex-start;
     font-size: 0.875rem;
