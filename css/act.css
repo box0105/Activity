@@ -4,7 +4,7 @@
         padding-top: 2rem;
 
         .b-hero {
-            background: url("images/浮現祭/main.jpg") center center / cover no-repeat;
+            background: url("/images/浮現祭/main.jpg") center center / cover no-repeat;
         }
 
         .b-main-info {
@@ -82,7 +82,7 @@
 .b-hero {
     width: auto;
     height: 520px;
-    background: url("images/封面圖.jpeg") center center / cover no-repeat;
+    background: url("/images/封面圖.jpeg") center center / cover no-repeat;
     opacity: 0.9;
 
     .b-text {
