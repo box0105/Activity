@@ -39,9 +39,8 @@
             border: 2px solid var(--grey200);
         }
 
-        .b-card.b-article-card {
-            border: 2px solid var(--grey100);
-            gap: 3rem;
+        .b-article-card {
+            gap: 4rem;
         }
 
         .b-aside {
@@ -51,16 +50,20 @@
             position: sticky;
             top: 0;
 
-            /* @media screen and (max-width:576px) {
+            @media screen and (max-width:1200px) {
                 width: 100%;
-            } */
+            }
 
             .b-purchaseBtn {
-                margin-top: 2.5rem;
+                margin-top: 3.5rem;
             }
 
             .b-warning {
                 border-top: 1.5px solid var(--grey200);
+                li {
+                    margin-block: 0.3rem;
+                    font-size: 0.875rem;
+                }
             }
         }
 
@@ -296,7 +299,6 @@
     color: var(--black);
     text-align: center;
     align-self: flex-start;
-    font-size: 0.875rem;
     font-weight: 400;
 
     &:hover {
