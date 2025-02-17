@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>活動 Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- 日期選擇器 -->
+    <!-- jQuery & Moment.js (必要) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+    <!-- Date Range Picker -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+    <link rel="stylesheet" href="./css/style1.css">
+    <link rel="stylesheet" href="./css/act.css">
+    <style>
+        @media screen and (max-width: 576px) {
+            html {
+                font-size: 16px !important;
+            }
+
+            .heading {
+                flex-direction: column;
+            }
+        }
+
+        body {
+            background-color: var(--grey50);
+        }
+
+        nav {
+            min-height: 30vh;
+            max-height: 50vh;
+
+            img {
+                width: 80%;
+                max-width: 8rem;
+                height: auto;
+            }
+
+            ul {
+                border-top: 0.75px solid var(--grey100);
+
+                .nav-item {
+                    padding-block: 4px;
+                    margin-block: 4px;
+                    border-radius: 6px;
+
+                    &:hover {
+                        background-color: #eee;
+                    }
+
+                    &.active {
+                        background-color: var(--grey900);
+
+                        a {
+                            color: white;
+                        }
+                    }
+                }
+
+                .nav-link,
+                .nav-link:hover {
+                    color: black;
+                }
+            }
+        }
+
+
+        .b-filter-card {
+            border-radius: 1rem;
+
+            h4 {
+                font-weight: 500;
+            }
+
+            .b-option-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem 1.5rem;
+                padding: 1rem;
+                background-color: #eee;
+                border-radius: 8px;
+            }
+        }
+
+        input::placeholder {
+            font-size: 14px;
+            color: gray;
+        }
+
+        .form-label {
+            padding: 8px 16px;
+            border-radius: 1rem;
+            border: 1px solid transparent;
+
+            &:hover {
+                background: #eee;
+                border: 1px solid var(--grey200);
+            }
+
+            &.active {
+                background-color: orange;
+                border: 1px solid var(--grey800);
+            }
+        }
+
+        input[name=datetimes] {
+            margin: 8px 16px;
+        }
+
+        .card .b-add-btn {
+            color: var(--grey50);
+            border: 1px solid var(--grey50);
+            font-size: 0.9rem;
+
+            &:hover {
+                background-color: var(--grey100);
+                color: black;
+            }
+        }
+
+        .table th {
+            min-width: 8rem;
+            height: 4rem;
+            align-content: center;
+
+            button {
+                font-weight: 600;
+
+                i {
+                    color: black;
+                }
+            }
+        }
+
+        .table td {
+            height: 7rem;
+            align-content: center;
+        }
+
+        .h6 {
+            font-weight: normal;
+        }
+
+        .b-option-container label {
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+
+        .b-option-container input:checked+label {
+            background-color: var(--grey900);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row px-2 py-3">
+            <!-- Panel -->
+            <nav class="col-md-2 mb-5 bg-white card p-3 d-flex flex-column align-items-center">
+                <img src="./_images/svg/logo-mb.svg" alt="">
+                <ul class="nav flex-column align-self-stretch mt-3 pt-3">
+                    <li class="nav-item active">
+                        <h6 class="mb-0"><a href="#" class="nav-link"><i
+                                    class="fa-solid fa-table-list me-3 text-secondary"></i>活動管理</a>
+                        </h6>
+                    </li>
+                    <li class="nav-item">
+                        <h6 class="mb-0"><a href="#" class="nav-link"><i
+                                    class="fa-solid fa-right-from-bracket me-3 text-secondary"></i>登出</a>
+                        </h6>
+                    </li>
+                </ul>
+            </nav>
+
+            <main class="col-md-10 px-0 ps-md-2">
+                <div class="container-fluid">
+                    <!-- Title & Search -->
+                    <div class="heading row mb-4">
+                        <div class="col-auto">
+                            <h1>活動後台管理</h1>
+                        </div>
+                        <div class="col-auto my-2">
+                            <div class="input-group mx-auto">
+                                <input type="text" class="form-control" name="search" placeholder="搜尋活動名稱、演出陣容">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filter -->
+                    <div class="b-filter-card card p-4 shadow-sm">
+                        <form class="row gx-4 gy-5">
+                            <div class="b-filter-title d-flex justify-content-between align-items-center w-100">
+                                <h4><button class="b-btn-unstyled">清除篩選條件</button></h4>
+                                <button class="b-btn-unstyled"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+
+                            <!-- 選項 -->
+                            <div class="row gy-3 gx-4 d-flex align-items-center">
+                                <div class="col-auto col-sm-1">
+                                    <h4>選項</h4>
+                                </div>
+                                <div class="col-12 col-sm-auto">
+                                    <label class="form-label active" data-bs-toggle="collapse"
+                                        data-bs-target="#activityOptions">活動類型</label>
+                                </div>
+                                <div class="col-12 col-sm-auto">
+                                    <label class="form-label" data-bs-toggle="collapse"
+                                        data-bs-target="#musicOptions">音樂類型</label>
+                                </div>
+                                <div class="col-12 col-sm-auto">
+                                    <label class="form-label" data-bs-toggle="collapse"
+                                        data-bs-target="#cityOptions">城市</label>
+                                </div>
+                            </div>
+
+                            <!-- collapse -->
+                            <div class="row gy-1 gx-4 d-flex align-items-center">
+                                <div class="col-12">
+                                    <div class="accordion" id="filterOptions">
+                                        <div id="activityOptions" class="collapse" data-bs-parent="#filterOptions">
+                                            <div class="b-option-container">
+                                                <input type="checkbox" id="activity-festival" name="activity"
+                                                    value="音樂祭" class="d-none">
+                                                <label for="activity-festival"
+                                                    class="btn btn-outline-secondary">音樂祭</label>
+
+                                                <input type="checkbox" id="activity-event" name="activity" value="音樂活動"
+                                                    class="d-none">
+                                                <label for="activity-event"
+                                                    class="btn btn-outline-secondary">音樂活動</label>
+
+                                                <input type="checkbox" id="activity-party" name="activity" value="電音派對"
+                                                    class="d-none">
+                                                <label for="activity-party"
+                                                    class="btn btn-outline-secondary">電音派對</label>
+                                            </div>
+                                        </div>
+                                        <div id="musicOptions" class="collapse" data-bs-parent="#filterOptions">
+                                            <div class="b-option-container">
+                                                <input type="checkbox" id="music-pop" name="music" value="流行音樂"
+                                                    class="d-none">
+                                                <label for="music-pop" class="btn btn-outline-secondary">流行音樂</label>
+
+                                                <input type="checkbox" id="music-rock" name="music" value="古典音樂"
+                                                    class="d-none">
+                                                <label for="music-rock" class="btn btn-outline-secondary">古典音樂</label>
+
+                                                <input type="checkbox" id="music-jazz" name="music" value="交響樂"
+                                                    class="d-none">
+                                                <label for="music-jazz" class="btn btn-outline-secondary">交響樂</label>
+                                            </div>
+                                        </div>
+                                        <div id="cityOptions" class="collapse" data-bs-parent="#filterOptions">
+                                            <div class="b-option-container">
+                                                <input type="radio" id="city-taipei" name="city" value="台北市"
+                                                    class="d-none">
+                                                <label for="city-taipei" class="btn btn-outline-secondary">台北市</label>
+
+                                                <input type="radio" id="city-newtaipei" name="city" value="新北市"
+                                                    class="d-none">
+                                                <label for="city-newtaipei"
+                                                    class="btn btn-outline-secondary">新北市</label>
+
+                                                <input type="radio" id="city-keelung" name="city" value="基隆市"
+                                                    class="d-none">
+                                                <label for="city-keelung" class="btn btn-outline-secondary">基隆市</label>
+
+                                                <input type="radio" id="city-taoyuan" name="city" value="桃園市"
+                                                    class="d-none">
+                                                <label for="city-taoyuan" class="btn btn-outline-secondary">桃園市</label>
+
+                                                <input type="radio" id="city-hsinchu" name="city" value="新竹市"
+                                                    class="d-none">
+                                                <label for="city-hsinchu" class="btn btn-outline-secondary">新竹市</label>
+
+                                                <input type="radio" id="city-hsinchu-county" name="city" value="新竹縣"
+                                                    class="d-none">
+                                                <label for="city-hsinchu-county"
+                                                    class="btn btn-outline-secondary">新竹縣</label>
+
+                                                <input type="radio" id="city-miaoli" name="city" value="苗栗縣"
+                                                    class="d-none">
+                                                <label for="city-miaoli" class="btn btn-outline-secondary">苗栗縣</label>
+
+                                                <input type="radio" id="city-taichung" name="city" value="台中市"
+                                                    class="d-none">
+                                                <label for="city-taichung" class="btn btn-outline-secondary">台中市</label>
+
+                                                <input type="radio" id="city-changhua" name="city" value="彰化縣"
+                                                    class="d-none">
+                                                <label for="city-changhua" class="btn btn-outline-secondary">彰化縣</label>
+
+                                                <input type="radio" id="city-nantou" name="city" value="南投縣"
+                                                    class="d-none">
+                                                <label for="city-nantou" class="btn btn-outline-secondary">南投縣</label>
+
+                                                <input type="radio" id="city-yunlin" name="city" value="雲林縣"
+                                                    class="d-none">
+                                                <label for="city-yunlin" class="btn btn-outline-secondary">雲林縣</label>
+
+                                                <input type="radio" id="city-chiayi" name="city" value="嘉義市"
+                                                    class="d-none">
+                                                <label for="city-chiayi" class="btn btn-outline-secondary">嘉義市</label>
+
+                                                <input type="radio" id="city-chiayi-county" name="city" value="嘉義縣"
+                                                    class="d-none">
+                                                <label for="city-chiayi-county"
+                                                    class="btn btn-outline-secondary">嘉義縣</label>
+
+                                                <input type="radio" id="city-tainan" name="city" value="台南市"
+                                                    class="d-none">
+                                                <label for="city-tainan" class="btn btn-outline-secondary">台南市</label>
+
+                                                <input type="radio" id="city-kaohsiung" name="city" value="高雄市"
+                                                    class="d-none">
+                                                <label for="city-kaohsiung"
+                                                    class="btn btn-outline-secondary">高雄市</label>
+
+                                                <input type="radio" id="city-pingtung" name="city" value="屏東縣"
+                                                    class="d-none">
+                                                <label for="city-pingtung" class="btn btn-outline-secondary">屏東縣</label>
+
+                                                <input type="radio" id="city-yilan" name="city" value="宜蘭縣"
+                                                    class="d-none">
+                                                <label for="city-yilan" class="btn btn-outline-secondary">宜蘭縣</label>
+
+                                                <input type="radio" id="city-hualien" name="city" value="花蓮縣"
+                                                    class="d-none">
+                                                <label for="city-hualien" class="btn btn-outline-secondary">花蓮縣</label>
+
+                                                <input type="radio" id="city-taitung" name="city" value="台東縣"
+                                                    class="d-none">
+                                                <label for="city-taitung" class="btn btn-outline-secondary">台東縣</label>
+
+                                                <input type="radio" id="city-penghu" name="city" value="澎湖縣"
+                                                    class="d-none">
+                                                <label for="city-penghu" class="btn btn-outline-secondary">澎湖縣</label>
+
+                                                <input type="radio" id="city-kinmen" name="city" value="金門縣"
+                                                    class="d-none">
+                                                <label for="city-kinmen" class="btn btn-outline-secondary">金門縣</label>
+
+                                                <input type="radio" id="city-matsu" name="city" value="連江縣"
+                                                    class="d-none">
+                                                <label for="city-matsu" class="btn btn-outline-secondary">連江縣</label>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 日期 -->
+                            <div class="row gy-3 gx-4 d-flex align-items-center">
+                                <div class="col-auto col-sm-1">
+                                    <h4 class="mb-0">日期</h4>
+                                </div>
+                                <div class="col-12 col-sm-auto">
+                                    <label class="form-label mb-0">7天內</label>
+                                </div>
+                                <div class="col-12 col-sm-auto">
+                                    <label class="form-label mb-0">30天內</label>
+                                </div>
+                                <div class="col-12 col-sm-auto">
+                                    <input class="px-3" type="text" name="datetimes" />
+                                </div>
+                            </div>
+
+                            <!-- 價錢 -->
+                            <div class="row gy-3 gx-4 d-flex align-items-center">
+                                <div class="col-auto col-sm-1">
+                                    <h4 class="mb-0">價錢</h4>
+                                </div>
+                                <div class="col-12 col-sm-auto">
+                                    <label class="form-label mb-0">價錢 bar</label>
+                                </div>
+                            </div>
+                            <button class="b-btn b-load-btn mb-1">顯示活動</button>
+                        </form>
+                    </div>
+
+                    <!-- Table -->
+                    <div class="card mt-5">
+                        <!-- heading -->
+                        <div class="bg-dark shadow-dark px-4 py-3">
+                            <div class="d-flex justify-content-between">
+                                <h2 class="text-white">活動列表</h2>
+                                <a class="btn b-add-btn" href="">新增活動</a>
+                            </div>
+                            <div class="text-secondary"><small>共計 10 項活動</small></div>
+                        </div>
+
+                        <!-- content -->
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-items-center text-center mb-0">
+                                    <!-- thead -->
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <button class="b-btn-unstyled text-secondary opacity-7">
+                                                    編號
+                                                    <i class="ms-2 fa-solid fa-sort-up"></i>
+                                                </button>
+                                            </th>
+                                            <th class="text-secondary opacity-7">
+                                                活動
+                                            </th>
+                                            <th class="text-secondary opacity-7">
+                                                名稱
+                                            </th>
+                                            <th class="text-secondary opacity-7">
+                                                活動類型
+                                            </th>
+                                            <th class="text-secondary opacity-7">
+                                                音樂類型
+                                            </th>
+                                            <!-- <th class="text-secondary opacity-7">
+                                            演出參與
+                                        </th> -->
+                                            <th>
+                                                <button class="b-btn-unstyled text-secondary opacity-7">
+                                                    活動日期
+                                                    <i class="ms-2 fa-solid fa-sort-up"></i>
+                                                </button>
+                                            </th>
+                                            <!-- <th class="text-secondary opacity-7">
+                                            報名日期
+                                        </th> -->
+                                            <th>
+                                                <button class="b-btn-unstyled text-secondary opacity-7">
+                                                    門票數量
+                                                    <i class="ms-2 fa-solid fa-sort-up"></i>
+                                                </button>
+                                            </th>
+                                            <th>
+                                                <button class="b-btn-unstyled text-secondary opacity-7">
+                                                    門票價格
+                                                    <i class="ms-2 fa-solid fa-sort-up"></i>
+                                                </button>
+                                            </th>
+
+                                            <th class="text-secondary opacity-7">
+                                                城市
+                                            </th>
+                                            <!-- update & delete -->
+                                            <th class="text-secondary opacity-7">
+                                                操作
+                                            </th>
+                                        </tr>
+                                    </thead>
+
+                                    <!-- tbody -->
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <h5 class="mb-0">1</h5>
+                                            </td>
+                                            <td>
+                                                <div class="ratio ratio-16x9 border rounded">
+                                                    <img src="./_images/浮現祭/main-1.jpg" class="img-fluid" alt="">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h5 class="mb-0 text-truncate">
+                                                    浮現祭
+                                                </h5>
+                                            </td>
+                                            <td>
+                                                <h5 class="mb-0">
+                                                    音樂祭
+                                                </h5>
+                                            </td>
+                                            <td>
+                                                <h5 class="mb-0">
+                                                    流行音樂
+                                                </h5>
+                                            </td>
+                                            <!-- <td>
+                                                <div class="row row-cols-1 gap-2 flex-wrap">
+                                                    <div class="col">
+                                                        <p class="text-center text-xs font-weight-bold mb-0 ">
+                                                            123
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </td> -->
+                                            <td>
+                                                <div class="h6 text-center mb-2">
+                                                    2024/3/12
+                                                </div>
+                                                <div class="h6 text-center mb-0">
+                                                    2024/5/11
+                                                </div>
+                                            </td>
+                                            <!-- <td>
+                                            <div class="h6 text-center mb-2">
+                                                2024/3/12
+                                            </div>
+                                            <div class="h6 text-center mb-0">
+                                                2024/5/11
+                                            </div>
+                                        </td> -->
+                                            <td>
+                                                <div class="h6 mb-0">
+                                                    999
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="h6 mb-0">
+                                                    NT$ 555
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h5 class="mb-0">
+                                                    台中市
+                                                </h5>
+                                            </td>
+
+                                            <td class="d-flex justify-content-center align-items-center gap-4">
+                                                <a class="text-secondary opacity-7" href="">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </a>
+                                                <a class="text-secondary opacity-7" href="">
+                                                    <i class="fa-regular fa-trash-can"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $('input[name="datetimes"]').daterangepicker({
+                timePicker: true,
+                startDate: moment().startOf('hour'),
+                endDate: moment().startOf('hour').add(32, 'hour'),
+                locale: {
+                    format: 'M/DD hh:mm A'
+                }
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
