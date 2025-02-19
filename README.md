@@ -1,5 +1,5 @@
 ### Admin 預覽
-https://box0105.github.io/Activity/act-admin.html
+https://box0105.github.io/Activity/admin-index.html
 
 ### 活動頁面 預覽
 https://box0105.github.io/Activity/act-list.html
