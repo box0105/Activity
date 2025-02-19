@@ -21,147 +21,7 @@
 
     <link rel="stylesheet" href="./css/style1.css">
     <link rel="stylesheet" href="./css/act.css">
-    <style>
-        @media screen and (max-width: 576px) {
-            html {
-                font-size: 16px !important;
-            }
-
-            .heading {
-                flex-direction: column;
-            }
-        }
-
-        body {
-            background-color: var(--grey50);
-        }
-
-        nav {
-            min-height: 30vh;
-            max-height: 50vh;
-
-            img {
-                width: 80%;
-                max-width: 8rem;
-                height: auto;
-            }
-
-            ul {
-                border-top: 0.75px solid var(--grey100);
-
-                .nav-item {
-                    padding-block: 4px;
-                    margin-block: 4px;
-                    border-radius: 6px;
-
-                    &:hover {
-                        background-color: #eee;
-                    }
-
-                    &.active {
-                        background-color: var(--grey900);
-
-                        a {
-                            color: white;
-                        }
-                    }
-                }
-
-                .nav-link,
-                .nav-link:hover {
-                    color: black;
-                }
-            }
-        }
-
-
-        .b-filter-card {
-            border-radius: 1rem;
-
-            h4 {
-                font-weight: 500;
-            }
-
-            .b-option-container {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 1rem 1.5rem;
-                padding: 1rem;
-                background-color: #eee;
-                border-radius: 8px;
-            }
-        }
-
-        input::placeholder {
-            font-size: 14px;
-            color: gray;
-        }
-
-        .form-label {
-            padding: 8px 16px;
-            border-radius: 1rem;
-            border: 1px solid transparent;
-
-            &:hover {
-                background: #eee;
-                border: 1px solid var(--grey200);
-            }
-
-            &.active {
-                background-color: orange;
-                border: 1px solid var(--grey800);
-            }
-        }
-
-        input[name=datetimes] {
-            margin: 8px 16px;
-        }
-
-        .card .b-add-btn {
-            color: var(--grey50);
-            border: 1px solid var(--grey50);
-            font-size: 0.9rem;
-
-            &:hover {
-                background-color: var(--grey100);
-                color: black;
-            }
-        }
-
-        .table th {
-            min-width: 8rem;
-            height: 4rem;
-            align-content: center;
-
-            button {
-                font-weight: 600;
-
-                i {
-                    color: black;
-                }
-            }
-        }
-
-        .table td {
-            height: 7rem;
-            align-content: center;
-        }
-
-        .h6 {
-            font-weight: normal;
-        }
-
-        .b-option-container label {
-            cursor: pointer;
-            transition: all 0.4s ease;
-        }
-
-
-        .b-option-container input:checked+label {
-            background-color: var(--grey900);
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/admin.css">
 </head>
 
 <body>
@@ -187,7 +47,7 @@
             <main class="col-md-10 px-0 ps-md-2">
                 <div class="container-fluid">
                     <!-- Title & Search -->
-                    <div class="heading row mb-4">
+                    <div class="heading row justify-content-between mb-4">
                         <div class="col-auto">
                             <h1>活動後台管理</h1>
                         </div>
@@ -201,7 +61,7 @@
 
                     <!-- Filter -->
                     <div class="b-filter-card card p-4 shadow-sm">
-                        <form class="row gx-4 gy-5">
+                        <form class="row gx-4 gy-4">
                             <div class="b-filter-title d-flex justify-content-between align-items-center w-100">
                                 <h4><button class="b-btn-unstyled">清除篩選條件</button></h4>
                                 <button class="b-btn-unstyled"><i class="fa-solid fa-xmark"></i></button>
@@ -227,7 +87,7 @@
                             </div>
 
                             <!-- collapse -->
-                            <div class="row gy-1 gx-4 d-flex align-items-center">
+                            <div class="row gy-0 gx-4 d-flex align-items-center">
                                 <div class="col-12">
                                     <div class="accordion" id="filterOptions">
                                         <div id="activityOptions" class="collapse" data-bs-parent="#filterOptions">
@@ -398,7 +258,7 @@
                         <div class="bg-dark shadow-dark px-4 py-3">
                             <div class="d-flex justify-content-between">
                                 <h2 class="text-white">活動列表</h2>
-                                <a class="btn b-add-btn" href="">新增活動</a>
+                                <a class="btn b-add-btn" href="./admin-create.html">新增活動</a>
                             </div>
                             <div class="text-secondary"><small>共計 10 項活動</small></div>
                         </div>
